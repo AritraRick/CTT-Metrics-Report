@@ -1,0 +1,47 @@
+name: Daily CTT Metrics Report
+
+on:
+  schedule:
+    - cron: '0 10 * * *'  # Runs daily at 10:00 AM UTC
+  workflow_dispatch:  # Allows manual triggering via the GitHub Actions UI
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Specify your Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up environment variables
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: |
+          echo "Environment variables set."
+
+      - name: Run the script
+        run: |
+          python CTT\ Metrics\ Deploy\ My\ Email\ Method_GitHub\(20\ March,\ 2025\).py
+
+      - name: Upload artifacts (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: reports
+          path: |
+            *.xlsx
+            *.log
