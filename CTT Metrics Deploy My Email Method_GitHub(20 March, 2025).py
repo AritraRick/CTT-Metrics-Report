@@ -15,19 +15,19 @@ current_date2 = date.today().strftime("%d-%m-%Y")
 
 # Database Configuration
 DB_CONFIG = {
-    'host': 'db2.c6wjnkskmyin.ap-south-1.rds.amazonaws.com',
-    'database': 'postgres',
-    'user': 'postgres',
-    'password': 'xhipment123!',
-    'port': 5432
+    'host': os.getenv("DB_HOST"),
+    'database': os.getenv("DB_NAME"),
+    'user': os.getenv("DB_USER"),
+    'password': os.getenv("DB_PASSWORD"),
+    'port': int(os.getenv("DB_PORT", 5432))  # Default port if not provided
 }
 
 # Email Configuration
 EMAIL_CONFIG = {
-    'user': 'aritra@xhipment.com',          # Sender email
-    'password': 'traj zuir wdpm qctv',     # App password or email password
-    'smtp_server': 'smtp.gmail.com',         # SMTP server for Gmail
-    'smtp_port': 587                         # SMTP port for TLS
+    'user': os.getenv("EMAIL_USER"),          # Sender email
+    'password': os.getenv("EMAIL_PASSWORD"),  # App password or email password
+    'smtp_server': 'smtp.gmail.com',          # SMTP server for Gmail
+    'smtp_port': 587                          # SMTP port for TLS
 }
 
 # Email Recipients
