@@ -39,7 +39,7 @@ EMAIL_BODY = 'Please find the daily CTT Metrics report attached.'
 
 # Attachment Details
 ATTACHMENT_NAME = f'CTT Metrics Report {current_date2}.xlsx'
-OUTPUT_PATH = Path.cwd() / ATTACHMENT_NAME
+OUTPUT_PATH = Path.cwd() / ATTACHMENT_NAME  # Save in the current working directory
 
 # Establish connection
 conn = psycopg2.connect(**DB_CONFIG)
